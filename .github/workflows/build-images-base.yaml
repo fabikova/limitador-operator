@@ -64,7 +64,7 @@ on:
 
 env:
   IMG_REGISTRY_HOST: quay.io
-  IMG_REGISTRY_ORG: kuadrant
+  IMG_REGISTRY_ORG: mfabikov/fabikova
   MAIN_BRANCH_NAME: main
   OPERATOR_NAME: limitador-operator
   QUAY_IMAGE_EXPIRY: ${{ inputs.quayImageExpiry }}

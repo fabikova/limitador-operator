@@ -17,7 +17,7 @@ permissions:
 
 env:
   IMG_REGISTRY_HOST: quay.io
-  IMG_REGISTRY_ORG: kuadrant
+  IMG_REGISTRY_ORG: mfabikov/fabikova
   OPERATOR_NAME: limitador-operator
 
 jobs:
@@ -144,7 +144,7 @@ jobs:
       relatedImageLimitador: quay.io/kuadrant/limitador:v${{ needs.read-version.outputs.limitador-version }}
       channels: stable
       defaultChannel: stable
-      quayImageExpiry: never
+      quayImageExpiry: 1w
 
   build-helm-chart:
     needs: [read-version, tag]
@@ -175,11 +175,8 @@ jobs:
             limitador-operator-${{ needs.read-version.outputs.version }}.tgz
             limitador-operator-${{ needs.read-version.outputs.version }}.tgz.prov
 
-      - name: Sync Helm Chart with repository
-        run: |
-          make helm-sync-package-created \
-            VERSION=${{ needs.read-version.outputs.version }} \
-            HELM_WORKFLOWS_TOKEN=${{ secrets.HELM_WORKFLOWS_TOKEN }}
+      # NOTE: "Sync Helm Chart with repository" step removed for isolated E2E testing.
+      # It would post a repository_dispatch to the upstream helm-charts repo.
 
   create-release:
     needs: [read-version, build-images, build-helm-chart]
