@@ -1,4 +1,4 @@
 limitador-operator:
-  version: "0.0.0"
+  version: "0.98.0"
 dependencies:
-  limitador: "0.0.0"
+  limitador: "2.4.2"
